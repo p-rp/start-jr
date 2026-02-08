@@ -1,27 +1,73 @@
-# Start Jr.
+<div align="center">
+  <img src="packages/assets/src/logos/logo-light.png" alt="Start Jr. Logo" width="200">
+</div>
 
-Full-stack application with React dashboard, Express API, and PostgreSQL database.
 
-## Architecture
+## Description
 
-```
-start-jr/
-├── apps/
-│   ├── api/              # Express.js + Drizzle ORM backend
-│   └── dashboard/         # React + TypeScript + Tailwind frontend
-├── packages/
-│   └── assets/           # Shared assets
-└── tools/                # Development tools
-```
+Start Jr. is a comprehensive Learning Management System (LMS) dashboard for startjr.com, designed to manage all users, track student learning progress, and provide administrative oversight. The platform serves as the central hub for administrators to manage the entire user lifecycle from registration to ongoing activity monitoring.
+
+The dashboard enables administrators to manage user registrations, monitor real-time activity, view detailed analytics, and control access through role-based permissions. It provides a secure, scalable foundation for managing educational content delivery, user progress tracking, and administrative workflows.
+
+Built as a production-ready full-stack application using a monorepo architecture with pnpm workspaces, ensuring type safety across frontend (React 19) and backend (Express 5) while maintaining clean separation of concerns. The architecture demonstrates expertise in modern full-stack development, from database schema design to responsive UI implementation.
+
+
 
 **Request Flow:** Client → Routes → Controllers → Services → Database
+
+The layered architecture enforces clear separation of concerns, making the codebase maintainable and testable. The shared assets package demonstrates modular, reusable design principles.
+
+## Key Technical Achievements
+
+- **Monorepo Management:** Efficient dependency management with pnpm workspaces, enabling shared packages and consistent tooling
+- **Type Safety:** End-to-end TypeScript from database schema (Drizzle ORM) to React components, catching errors at compile time
+- **Clean Architecture:** Layered design with Routes → Controllers → Services → Database, ensuring business logic separation
+- **Security-First:** Rate limiting (5-100 requests/15min), input sanitization, JWT auth with HTTP-only cookies, RBAC with admin roles
+- **API Design:** RESTful endpoints with interactive Swagger documentation at `/api-docs`, following OpenAPI standards
+- **Performance:** SWC compilation for fast builds, optimized bundle size, lazy loading in React
+- **Database:** Type-safe queries with Drizzle ORM, PostgreSQL migrations, Supabase support for cloud deployment
+
+## Tech Stack
+
+### Frontend
+- **React 19** with TypeScript for component-based UI
+- **React Router 7** for client-side routing
+- **Tailwind CSS v4** with modern styling and theme customization
+- **Vite** + **SWC** for lightning-fast HMR and builds
+- **Lucide React** for consistent iconography
+
+### Backend
+- **Express 5** with TypeScript for robust API layer
+- **Drizzle ORM** for type-safe database queries
+- **PostgreSQL** with Supabase support for managed hosting
+- **JWT** authentication with HTTP-only cookies
+- **Helmet** for security headers, **express-rate-limit** for DDoS protection
+
+### DevOps & Tools
+- **pnpm workspaces** for monorepo dependency management
+- **ESLint** for code quality enforcement
+- **Swagger UI** for interactive API documentation
+- **Drizzle Kit** for database schema management
+
+## Core Features
+
+- **Secure Authentication:** JWT-based auth with HTTP-only cookies, bcrypt password hashing
+- **Role-Based Access Control (RBAC):** Admin/user roles with protected routes
+- **User Management:** CRUD operations with pagination, search, and sorting
+- **Advanced Querying:** Support for filtering by email, role, status; sorting by any field
+- **Real-Time Dashboard:** Activity feed, user statistics, growth charts
+- **Analytics:** User growth tracking over time, activity logging with IP addresses
+- **Security:** Rate limiting, input sanitization (XSS prevention), CORS configuration
 
 ## Quick Start
 
 **Prerequisites:** Node.js 18+, pnpm, PostgreSQL 15+ or Supabase
 
 ```bash
+# Install dependencies
 pnpm install
+
+# Configure environment files
 cp apps/api/.env.example apps/api/.env
 cp apps/dashboard/.env.example apps/dashboard/.env
 ```
@@ -45,10 +91,10 @@ cd apps/api && pnpm db:push
 **Start Development Servers:**
 
 ```bash
-# Terminal 1
+# Terminal 1 - API
 cd apps/api && pnpm dev
 
-# Terminal 2
+# Terminal 2 - Dashboard
 cd apps/dashboard && pnpm dev
 ```
 
@@ -99,24 +145,8 @@ pnpm --filter dashboard dev        # Run Dashboard
 pnpm --filter api db:push          # Run migrations
 ```
 
-## Features
-
-- **Authentication:** JWT-based with HTTP-only cookies
-- **User Management:** CRUD operations, pagination, search, role-based access
-- **Dashboard:** Statistics, activity feed, user growth charts
-- **Security:** Rate limiting, input sanitization, Helmet headers, RBAC
-
-## Tech Stack
-
-**Backend:** Express 5, TypeScript, Drizzle ORM, PostgreSQL, JWT
-
-**Frontend:** React 19, TypeScript, React Router 7, Tailwind CSS 4, Vite
-
 ## Documentation
 
 - [API Documentation](apps/api/README.md) - Detailed API endpoints and architecture
 - [API Specs](http://localhost:3001/api-docs) - Interactive Swagger documentation
 
-## License
-
-ISC
